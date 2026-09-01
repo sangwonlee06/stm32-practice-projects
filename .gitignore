@@ -1,0 +1,52 @@
+# =========================
+# STM32CubeIDE build output
+# =========================
+Debug/
+Release/
+build/
+cmake-build-*/
+
+# Object / dependency files
+*.o
+*.obj
+*.d
+*.su
+*.cyclo
+
+# Compiled binaries
+*.elf
+*.hex
+*.bin
+*.map
+*.list
+
+# Libraries
+*.a
+*.lib
+
+# =========================
+# IDE temporary files
+# =========================
+.settings/
+.metadata/
+.idea/
+.vscode/
+
+# Eclipse/CubeIDE temporary files
+*.launch
+*.log
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Backup/temp files
+# =========================
+*~
+*.bak
+*.tmp
+*.swp
