@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stdio.h"		// printf function
 
 /* USER CODE END Includes */
 
@@ -54,6 +55,17 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+int _write(int file, char *ptr, int len)
+{
+	/* Implement your write code here, this is used by puts and printf for example */
+	int i = 0;
+	for (i = 0; i < len; i++)
+		ITM_SendChar((*ptr++));
+	return len;
+}
+
+uint8_t count = 0;
 
 /* USER CODE END 0 */
 
@@ -97,6 +109,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  HAL_GPIO_TogglePin(GPIOA, LD2_Pin);	// on board LED
+	  count++; // increment count
+	  printf("HELLO WORLD count = &d \n", count);	//print something
+	  HAL_Delay(250); // 250 ms delay
   }
   /* USER CODE END 3 */
 }
