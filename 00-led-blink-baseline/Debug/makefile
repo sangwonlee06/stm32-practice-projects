@@ -60,8 +60,8 @@ all: main-build
 main-build: 00-led-blink-baseline.elf secondary-outputs
 
 # Tool invocations
-00-led-blink-baseline.elf 00-led-blink-baseline.map: $(OBJS) $(USER_OBJS) C:\Users\sangw\OneDrive\Desktop\stm32-practice-projects\00-led-blink-baseline\STM32F446RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "00-led-blink-baseline.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\sangw\OneDrive\Desktop\stm32-practice-projects\00-led-blink-baseline\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="00-led-blink-baseline.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+00-led-blink-baseline.elf 00-led-blink-baseline.map: $(OBJS) $(USER_OBJS) C:\Users\sangw\Embedded\ Systems\stm32-practice-projects\00-led-blink-baseline\STM32F446RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "00-led-blink-baseline.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\sangw\Embedded Systems\stm32-practice-projects\00-led-blink-baseline\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="00-led-blink-baseline.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
