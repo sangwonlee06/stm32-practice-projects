@@ -107,6 +107,8 @@ int main(void)
 	  TxData[i] = i&(0xff);
   }
 
+  HAL_UART_Transmit_DMA(&huart2, TxData, 10240);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -115,17 +117,7 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
-//	  HAL_UART_Transmit(&huart2, TxData, 10240, HAL_MAX_DELAY);
-
-	  if (isSent == 1)
-	  {
-		  HAL_UART_Transmit_DMA(&huart2, TxData, 10240);
-		  isSent = 0;
-	  }
-
-	  HAL_GPIO_TogglePin(GPIOA, LD2_Pin);
-	  HAL_Delay(1000);
-	  countloop++;
+    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
