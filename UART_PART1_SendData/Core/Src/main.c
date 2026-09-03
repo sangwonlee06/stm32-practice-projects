@@ -59,14 +59,40 @@ static void MX_USART2_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 uint8_t TxData[10240];
+
 int isSent = 1;
 int countloop = 0;
 int countinterrupt = 0;
+
+int indx = 49; // char '1'
+
+void HAL_UART_TxHalfCpltCallback(UART_HandleTypeDef *huart)
+{
+	  for (uint32_t i = 0; i < 5120; i++)
+	  {
+		  TxData[i] = indx;
+	  }
+	  indx++;
+
+}
+
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
-	isSent = 1;
-	countinterrupt++;
+	  for (uint32_t i = 5120; i < 10240; i++)
+	  {
+		  TxData[i] = indx;
+	  }
+	  indx++;
+
+	  if (indx >= 60)
+	  {
+		  HAL_UART_DMAStop(&huart2);
+	  }
+	  isSent = 1;
+	  countinterrupt++;
+
 }
+
 /* USER CODE END 0 */
 
 /**
