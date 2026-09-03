@@ -116,17 +116,15 @@ int main(void)
     /* USER CODE END WHILE */
 
 //	  HAL_UART_Transmit(&huart2, TxData, 10240, HAL_MAX_DELAY);
-	  if (isSent = 1)
-	  {
-		  HAL_UART_Transmit_IT(&huart2, TxData, 10240);
-		  // In interrupt mode, data is transmitted asynchronously while the CPU handles other tasks.
-		  // The transmission-complete callback function is defined above.
 
+	  if (isSent == 1)
+	  {
+		  HAL_UART_Transmit_DMA(&huart2, TxData, 10240);
 		  isSent = 0;
 	  }
 
 	  HAL_GPIO_TogglePin(GPIOA, LD2_Pin);
-	  HAL_Delay(500);
+	  HAL_Delay(1000);
 	  countloop++;
   }
   /* USER CODE END 3 */
