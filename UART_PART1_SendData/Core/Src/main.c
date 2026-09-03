@@ -59,6 +59,14 @@ static void MX_USART2_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 uint8_t TxData[10240];
+int isSent = 1;
+int countloop = 0;
+int countinterrupt = 0;
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
+	isSent = 1;
+	countinterrupt++;
+}
 /* USER CODE END 0 */
 
 /**
@@ -107,10 +115,19 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
-	  // HAL_UART_Transmit() blocks until all data is sent, so a longer transfer increases the LED blink interval.
-	  HAL_UART_Transmit(&huart2, TxData, 10240, HAL_MAX_DELAY);
+//	  HAL_UART_Transmit(&huart2, TxData, 10240, HAL_MAX_DELAY);
+	  if (isSent = 1)
+	  {
+		  HAL_UART_Transmit_IT(&huart2, TxData, 10240);
+		  // In interrupt mode, data is transmitted asynchronously while the CPU handles other tasks.
+		  // The transmission-complete callback function is defined above.
+
+		  isSent = 0;
+	  }
+
 	  HAL_GPIO_TogglePin(GPIOA, LD2_Pin);
 	  HAL_Delay(500);
+	  countloop++;
   }
   /* USER CODE END 3 */
 }
