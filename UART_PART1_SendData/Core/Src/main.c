@@ -102,9 +102,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  HAL_UART_Receive(&huart2, RxData, 5, HAL_MAX_DELAY);
 
 	  HAL_GPIO_TogglePin(GPIOA, LD2_Pin);
-	  HAL_Delay(500);
+	  HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
