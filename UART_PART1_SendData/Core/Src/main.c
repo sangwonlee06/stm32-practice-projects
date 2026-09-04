@@ -58,6 +58,7 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint8_t FinalData[20];
 uint8_t RxData[20];
 uint8_t temp[2];
 int indx = 0;
@@ -114,6 +115,11 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		if (temp[0] == '\n')
+		{
+			memcpy (FinalData, RxData, indx);
+			indx = 0;
+		}
 
 	  HAL_GPIO_TogglePin(GPIOA, LD2_Pin);
 	  HAL_Delay(1000);
