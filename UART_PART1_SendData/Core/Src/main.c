@@ -21,6 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
+#include "string.h"
 
 /* USER CODE END Includes */
 
@@ -57,6 +59,15 @@ static void MX_USART2_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 uint8_t RxData[20];
+uint8_t temp[2];
+int indx = 0;
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	memcpy(RxData + indx, temp, 1);
+	if (++indx >= 20) indx = 0;
+	HAL_UART_Receive_IT(&huart2, temp, 1);
+}
 
 /* USER CODE END 0 */
 
@@ -91,6 +102,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+  HAL_UART_Receive_IT(&huart2, temp, 1);
 
 
   /* USER CODE END 2 */
@@ -102,7 +114,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  HAL_UART_Receive(&huart2, RxData, 5, HAL_MAX_DELAY);
 
 	  HAL_GPIO_TogglePin(GPIOA, LD2_Pin);
 	  HAL_Delay(1000);
